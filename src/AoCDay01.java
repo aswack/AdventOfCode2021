@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Day01 {
+public class AoCDay01 {
 
   public static int sonarSweep(File input) throws FileNotFoundException {
     Scanner scan = new Scanner(input);
