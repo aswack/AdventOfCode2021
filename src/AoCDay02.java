@@ -18,17 +18,11 @@ public class AoCDay02 {
       String direction = scan.next();
       int units = scan.nextInt();
       switch (direction) {
-        case "forward":
-          xAxis += units;
-          break;
-        case "down":
-          yAxis += units;
-          break;
-        case "up":
-          yAxis -= units;
-          break;
-        default:
-          break;
+        case "forward" -> xAxis += units;
+        case "down" -> yAxis += units;
+        case "up" -> yAxis -= units;
+        default -> {
+        }
       }
     }
     return xAxis * yAxis;
@@ -44,26 +38,26 @@ public class AoCDay02 {
       String direction = scan.next();
       int units = scan.nextInt();
       switch (direction) {
-        case "forward":
+        case "forward" -> {
           xAxis += units;
-          yAxis += units*aim;
-          break;
-        case "down":
-          aim += units;
-          break;
-        case "up":
-          aim -= units;
-          break;
-        default:
-          break;
+          yAxis += units * aim;
+        }
+        case "down" -> aim += units;
+        case "up" -> aim -= units;
+        default -> {
+        }
       }
     }
     return xAxis * yAxis;
   }
 
   public static void main(String[] args) throws FileNotFoundException {
+    File test = new File("data/day02test.txt");
     File input = new File("data/day02input.txt");
-    System.out.println(findDepth(input));
-    System.out.println(findActualDepth(input));
+
+    System.out.println("Test Depth: " + findDepth(test));
+    System.out.println("Test Actual Depth: " + findActualDepth(test));
+    System.out.println("Input Depth: " + findDepth(input));
+    System.out.println("Input Actual Depth: " + findActualDepth(input));
   }
 }
