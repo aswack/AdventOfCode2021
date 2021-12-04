@@ -46,7 +46,6 @@ public class AoCDay01 {
 
   public static void main(String[] args) throws FileNotFoundException {
     File input = new File("data/day01input.txt");
-
     System.out.println(sonarSweep(input));
     System.out.println(windowSweep(input));
   }
