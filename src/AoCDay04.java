@@ -48,13 +48,12 @@ public class AoCDay04 {
     int steps = 0; // Tracks how many steps it took to win
     for (int num : numbers) {
       steps++;
-      for (int row = 0; row < board.length; row++) {
-        for (int col = 0; col < board[row].length; col++) {
-          if (num == board[row][col].number) {
-            board[row][col].marked = true;
-            if (checkBoard(board)){ // Checks the board state every time a new number is marked
-              Integer[] winner = new Integer[] {steps, sumUnmarkedNumbers(board, num)}; // Return array to be added to the winners ArrayList
-              return winner;
+      for (bingoNum[] bingoNums : board) {
+        for (bingoNum bingoNum : bingoNums) {
+          if (num == bingoNum.number) {
+            bingoNum.marked = true;
+            if (checkBoard(board)) { // Checks the board state every time a new number is marked
+              return new Integer[]{steps, sumUnmarkedNumbers(board, num)};
             }
           }
         }
@@ -66,19 +65,26 @@ public class AoCDay04 {
   // Checks to see if a bingo has been called
   public static boolean checkBoard(bingoNum[][] board) {
     // CHECK FOR WINNING ROW
-    for (int i = 0; i < board.length; i++) {
+    for (bingoNum[] bingoNums : board) {
       boolean isBingo = true;
-      for (int j = 0; j < board[i].length; j++){
-        if (!board[i][j].marked) isBingo = false;
+      for (bingoNum bingoNum : bingoNums) {
+        if (!bingoNum.marked) {
+          isBingo = false;
+          break;
+        }
       }
-      if (isBingo) return true;
+      if (isBingo)
+        return true;
     }
 
     // CHECK FOR WINNING COLUMN
     for (int i = 0; i < board.length; i++) {
       boolean isBingo = true;
       for (int j = 0; j < board[i].length; j++){
-        if (!board[j][i].marked) isBingo = false;
+        if (!board[j][i].marked) {
+          isBingo = false;
+          break;
+        }
       }
       if (isBingo) return true;
     }
@@ -88,10 +94,10 @@ public class AoCDay04 {
   // For winning board states - checks and returns the sum of unmarked numbers * the last number called
   public static int sumUnmarkedNumbers(bingoNum[][] board, int winningNum) {
     int sum = 0;
-    for (int i = 0; i < board.length; i++) {
-      for (int j = 0; j < board[i].length; j++) {
-        if (!board[i][j].marked) {
-          sum += board[i][j].number;
+    for (bingoNum[] bingoNums : board) {
+      for (bingoNum bingoNum : bingoNums) {
+        if (!bingoNum.marked) {
+          sum += bingoNum.number;
         }
       }
     }
